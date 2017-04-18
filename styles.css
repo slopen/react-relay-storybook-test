@@ -1,0 +1,28 @@
+@keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.67; }
+  100% { opacity: 1.0; }
+}
+@-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.67; }
+  100% { opacity: 1.0; }
+}
+
+.user-locate-animation {
+  animation: blink 4s ease 0s infinite;
+  -webkit-animation: blink 4s ease 0s infinite;
+}
+
+.user-locate-disable{
+    pointer-events: none;
+    -webkit-filter: grayscale(1);
+    filter:grayscale(1);
+}
+
+.action-locate-user {
+  background-color:#0cb9e2;
+  color:#FFF;
+  padding:10px;
+  text-decoration: none;
+}

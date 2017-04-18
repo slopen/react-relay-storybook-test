@@ -1,0 +1,66 @@
+# An object, that can be fetched by the globally unique ID among all types.
+interface Node {
+    id: ID!
+}
+
+interface Connection {
+    pageInfo: PageInfo
+}
+
+# The `ConnectionCursor` is String type, that represents a point of record in data
+# set.  Due this point, you may request previous or next records.
+scalar ConnectionCursor
+
+
+schema {
+    query: RootQuery
+}
+
+type RootQuery {
+    node (
+        id: ID!
+    ): Node
+
+    viewer: Viewer
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+    endCursor: String
+}
+
+type Viewer {
+
+    profiles (
+        first: Int
+        last: Int
+        before: String
+        after: String
+    ): ProfilesConnection
+
+}
+
+type Profile implements Node {
+    id: ID!
+    name: String
+    email: String
+    avatar: String
+    nickname: String
+}
+
+type ProfilesConnection implements Connection {
+    pageInfo: PageInfo!
+    edges: [ProfilesEdge]
+}
+
+type ProfilesEdge {
+    node: Profile
+    cursor: String!
+}
+
+type ProfilesConnection implements Connection {
+    pageInfo: PageInfo!
+    edges: [ProfilesEdge]
+}
